@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { login as performLogin } from "../services/client.js";
-import { AuthContextType, User } from "../types.js";
+import { AuthContextType } from "../types.js";
 
 const AuthContext = createContext<AuthContextType>({
   user: null,

@@ -120,7 +120,7 @@ export const Login = () => {
       <Flex p={8} flex={1} alignItems={"center"} justifyContent={"center"}>
         <Stack spacing={4} w={"full"} maxW={"md"}>
           <Text
-            fontSize={80}
+            fontSize={50}
             fontWeight={"bold"}
             fontFamily={"sans-serif"}
             color={"rgba(255,100,100,1)"}

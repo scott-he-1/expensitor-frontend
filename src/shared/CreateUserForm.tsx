@@ -1,5 +1,5 @@
 import { Form, Formik, useField, FieldHookConfig } from "formik";
-import Yup from "yup";
+import * as Yup from "yup";
 import {
   Alert,
   AlertIcon,
@@ -7,7 +7,6 @@ import {
   Button,
   FormLabel,
   Input,
-  Select,
   Stack,
 } from "@chakra-ui/react";
 import { saveUser } from "../services/client";
@@ -15,7 +14,6 @@ import {
   successNotification,
   errorNotification,
 } from "../services/notification";
-import { useAuth } from "../context/AuthContext";
 
 const MyTextInput = ({
   label,
@@ -32,31 +30,6 @@ const MyTextInput = ({
     <Box>
       <FormLabel htmlFor={props.name}>{label}</FormLabel>
       <Input className="text-input" {...field} {...props} />
-      {meta.touched && meta.error ? (
-        <Alert className="error" status={"error"} mt={2}>
-          <AlertIcon />
-          {meta.error}
-        </Alert>
-      ) : null}
-    </Box>
-  );
-};
-
-const MySelect = ({
-  label,
-  ...props
-}: {
-  label: string;
-  name: string;
-  type: string;
-  placeholder: string;
-  props: string | FieldHookConfig<any>;
-}) => {
-  const [field, meta] = useField(props);
-  return (
-    <Box>
-      <FormLabel htmlFor={props.name}>{label}</FormLabel>
-      <Select {...field} {...props} />
       {meta.touched && meta.error ? (
         <Alert className="error" status={"error"} mt={2}>
           <AlertIcon />
@@ -112,24 +85,11 @@ export const CreateUserForm = ({
           <Form>
             <Stack spacing={"24px"}>
               <MyTextInput
-                label="Name"
-                name="name"
-                type="text"
-                placeholder="Jane"
-              />
-
-              <MyTextInput
                 label="Email Address"
                 name="email"
                 type="email"
-                placeholder="jane@formik.com"
-              />
-
-              <MyTextInput
-                label="Age"
-                name="age"
-                type="number"
-                placeholder="20"
+                placeholder="johndoe@email.com"
+                props={""}
               />
 
               <MyTextInput
@@ -137,13 +97,8 @@ export const CreateUserForm = ({
                 name="password"
                 type="password"
                 placeholder={"pick a secure password"}
+                props={""}
               />
-
-              <MySelect label="Gender" name="gender">
-                <option value="">Select gender</option>
-                <option value="MALE">Male</option>
-                <option value="FEMALE">Female</option>
-              </MySelect>
 
               <Button disabled={!isValid || isSubmitting} type="submit">
                 Submit
