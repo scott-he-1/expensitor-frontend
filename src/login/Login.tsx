@@ -67,7 +67,6 @@ const LoginForm = () => {
         login(values)
           .then(() => {
             navigate("/dashboard");
-            console.log("Successfully logged in");
           })
           .catch((err) => {
             errorNotification(err.code, err.response.data.message);

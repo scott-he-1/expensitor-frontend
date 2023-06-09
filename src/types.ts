@@ -3,7 +3,7 @@ export type User = {
   password: string;
 };
 
-export type Expense = {
+export type ExpenseType = {
   id: number;
   description: string;
   amount: number;
@@ -11,8 +11,15 @@ export type Expense = {
   userId: number;
 };
 
+export type SaveExpense = {
+  description: string;
+  amount: number;
+  userId: number;
+};
+
 export type AuthContextType = {
   user: string | null;
+  userId: number | null;
   login: ({
     email,
     password,

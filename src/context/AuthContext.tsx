@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { login as performLogin } from "../services/client.js";
 import { AuthContextType } from "../types.js";
+import jwtDecode from "jwt-decode";
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
+  userId: null,
   login: () => Promise.resolve().then(),
   logOut: () => {},
   isUserAuthenticated: () => false,
@@ -12,11 +14,14 @@ const AuthContext = createContext<AuthContextType>({
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<string | null>(null);
+  const [userId, setUserId] = useState<number | null>(null);
 
   const setUserFromToken = () => {
     let token = localStorage.getItem("user_token");
     if (token) {
-      setUser(token);
+      const user: { email: string; id: number; iat: number } = jwtDecode(token);
+      setUser(user.email);
+      setUserId(user.id);
     }
   };
   useEffect(() => {
@@ -30,10 +35,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return new Promise((resolve, reject) => {
       performLogin(emailAndPassword)
         .then((res) => {
-          const jwtToken = res.headers["authorization"];
-          localStorage.setItem("user_token", jwtToken);
-
-          setUser(jwtToken);
+          localStorage.setItem("user_token", res.data["user_token"]);
+          setUserFromToken();
           resolve(res);
         })
         .catch((err) => {
@@ -59,6 +62,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     <AuthContext.Provider
       value={{
         user,
+        userId,
         login,
         logOut,
         isUserAuthenticated,
@@ -74,6 +78,7 @@ export const useAuth = () => {
   const context = useContext(AuthContext);
   return {
     user: context.user,
+    userId: context.userId,
     login: context.login,
     logOut: context.logOut,
     isUserAuthenticated: context.isUserAuthenticated,

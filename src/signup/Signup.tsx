@@ -23,7 +23,7 @@ export const SignUp = () => {
           </Heading>
           <CreateUserForm
             onSuccess={(token: string) => {
-              localStorage.setItem("access_token", token);
+              localStorage.setItem("user_token", token);
               setUserFromToken();
               navigate("/dashboard");
             }}

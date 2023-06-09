@@ -9,13 +9,22 @@ import { Login } from "./login/Login.tsx";
 import { SignUp } from "./signup/Signup.tsx";
 import { ProtectedRoute } from "./shared/ProtectedRoute.tsx";
 import { Home } from "./Home.tsx";
+import { Expense } from "./Expense.tsx";
 
 const { ToastContainer } = createStandaloneToast();
 
 const router = createBrowserRouter([
   { path: "/", element: <Login /> },
   { path: "/signup", element: <SignUp /> },
-  { path: "/dashboard", element: <Home /> },
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
+    ),
+  },
+  {path:"/dashboard/expenses", element: <Expense/>}
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
