@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { login as performLogin } from "../services/client.js";
-import { AuthContextType } from "../types.js";
+import { login as performLogin } from "../../services/client.js";
+import { AuthContextType } from "../../types.js";
 import jwtDecode from "jwt-decode";
 
 const AuthContext = createContext<AuthContextType>({
@@ -20,6 +20,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     let token = localStorage.getItem("user_token");
     if (token) {
       const user: { email: string; id: number; iat: number } = jwtDecode(token);
+
       setUser(user.email);
       setUserId(user.id);
     }

@@ -4,10 +4,10 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { createStandaloneToast } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import AuthProvider from "./context/AuthContext.tsx";
-import { Login } from "./login/Login.tsx";
-import { SignUp } from "./signup/Signup.tsx";
-import { ProtectedRoute } from "./shared/ProtectedRoute.tsx";
+import AuthProvider from "./components/context/AuthContext.tsx";
+import { Login } from "./components/login/Login.tsx";
+import { SignUp } from "./components/signup/Signup.tsx";
+import { ProtectedRoute } from "./components/shared/ProtectedRoute.tsx";
 import { Home } from "./Home.tsx";
 import { Expense } from "./Expense.tsx";
 

@@ -9,11 +9,11 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
-import { saveUser } from "../services/client";
+import { saveUser } from "../../services/client";
 import {
   successNotification,
   errorNotification,
-} from "../services/notification";
+} from "../../services/notification";
 
 const MyTextInput = ({
   label,
@@ -65,7 +65,6 @@ export const CreateUserForm = ({
           setSubmitting(true);
           saveUser(user)
             .then((res) => {
-              console.log(res);
               successNotification(
                 "User saved",
                 `${user.email} was successfully saved`

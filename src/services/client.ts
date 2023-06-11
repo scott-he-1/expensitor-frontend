@@ -56,7 +56,7 @@ export const login = async (emailAndPassword: {
 export const getUserExpenses = async (userId: number) => {
   try {
     return await axios.get(
-      `${import.meta.env.VITE_API_DATA_URL}/user/${userId}/expenses`,
+      `${import.meta.env.VITE_API_BASE_URL}/user/${userId}/expenses`,
       getAuthConfig()
     );
   } catch (e) {
@@ -66,7 +66,9 @@ export const getUserExpenses = async (userId: number) => {
 
 export const getExpense = async (expenseId: number) => {
   try {
-    return await axios.get(`${import.meta.env.VITE_API_DATA_URL}/${expenseId}`);
+    return await axios.get(
+      `${import.meta.env.VITE_API_BASE_URL}/expense/${expenseId}`
+    );
   } catch (e) {
     throw e;
   }
@@ -75,7 +77,7 @@ export const getExpense = async (expenseId: number) => {
 export const saveExpense = async (expense: SaveExpense) => {
   try {
     return await axios.post(
-      `${import.meta.env.VITE_API_DATA_URL}/expense`,
+      `${import.meta.env.VITE_API_BASE_URL}/expense`,
       expense
     );
   } catch (e) {
@@ -89,8 +91,9 @@ export const updateExpense = async (
 ) => {
   try {
     return await axios.put(
-      `${import.meta.env.VITE_API_DATA_URL}/${expenseId}`,
-      expense
+      `${import.meta.env.VITE_API_BASE_URL}/expense/${expenseId}`,
+      expense,
+      getAuthConfig()
     );
   } catch (e) {
     throw e;
@@ -100,7 +103,8 @@ export const updateExpense = async (
 export const deleteExpense = async (expenseId: number) => {
   try {
     return await axios.delete(
-      `${import.meta.env.VITE_API_DATA_URL}/${expenseId}`
+      `${import.meta.env.VITE_API_BASE_URL}/expense/${expenseId}`,
+      getAuthConfig()
     );
   } catch (e) {
     throw e;

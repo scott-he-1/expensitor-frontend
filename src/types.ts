@@ -7,14 +7,15 @@ export type ExpenseType = {
   id: number;
   description: string;
   amount: number;
-  datePurchased: number;
+  datePurchased: string;
   userId: number;
 };
 
 export type SaveExpense = {
+  id: number;
   description: string;
   amount: number;
-  userId: number;
+  datePurchased: string;
 };
 
 export type AuthContextType = {

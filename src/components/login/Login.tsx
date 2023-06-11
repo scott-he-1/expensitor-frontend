@@ -14,7 +14,7 @@ import {
 import { Formik, Form, useField, FieldHookConfig } from "formik";
 import * as Yup from "yup";
 import { useAuth } from "../context/AuthContext.js";
-import { errorNotification } from "../services/notification.js";
+import { errorNotification } from "../../services/notification.js";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 

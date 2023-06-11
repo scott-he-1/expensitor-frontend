@@ -29,7 +29,7 @@ import {
   FiSettings,
 } from "react-icons/fi";
 import { BiMoney } from "react-icons/bi";
-import { useAuth } from "../context/AuthContext.jsx";
+import { useAuth } from "../context/AuthContext.js";
 
 const LinkItems = [
   { name: "Home", route: "/dashboard", icon: FiHome },
