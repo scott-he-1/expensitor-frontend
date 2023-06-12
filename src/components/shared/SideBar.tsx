@@ -21,12 +21,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import {
-  FiBell,
-  FiChevronDown,
-  FiHome,
-  FiMenu,
-} from "react-icons/fi";
+import { FiBell, FiChevronDown, FiHome, FiMenu } from "react-icons/fi";
 import { BiMoney } from "react-icons/bi";
 import { useAuth } from "../context/AuthContext.js";
 
