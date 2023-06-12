@@ -101,7 +101,6 @@ export const ExpenseItem = ({
         })}
         onSubmit={(updatedExpense) => {
           updateExpense(id, {
-            id,
             description: updatedExpense.description,
             amount: Number(updatedExpense.amount),
             datePurchased: updatedExpense.datePurchased,
@@ -124,22 +123,29 @@ export const ExpenseItem = ({
         }}
       >
         <Form>
-          <Flex gridGap={5} alignItems={"center"}>
+          <Flex alignItems={"center"} justifyContent={"center"} gridGap={5}>
             {window.innerWidth > 1000 ? (
               <>
                 <TextInput name="description" type="text" props={""} />
                 <TextInput name="amount" type="text" props={""} />
                 <TextInput name="datePurchased" type="text" props={""} />
-                <Button type="submit" fontSize={12} w={"50%"}>
+                <Button
+                  type="submit"
+                  w={"50%"}
+                  marginLeft={"auto"}
+                  backgroundColor={"gray"}
+                >
                   Update
                 </Button>
               </>
             ) : (
-              <Flex flexDirection={"column"} gridGap={5}>
+              <Flex flexDirection={"column"} gridGap={5} alignItems={"center"}>
                 <TextInput name="description" type="text" props={""} />
                 <TextInput name="amount" type="text" props={""} />
                 <TextInput name="datePurchased" type="text" props={""} />
-                <Button type="submit">Update</Button>
+                <Button type="submit" marginLeft={"auto"}>
+                  Update
+                </Button>
                 <Button onClick={onCloseResponsiveEditModal}>Cancel</Button>
               </Flex>
             )}
@@ -152,22 +158,25 @@ export const ExpenseItem = ({
   return (
     <Center>
       <Box
-        maxWidth={"1000px"}
-        minWidth={"350px"}
-        w={"50%"}
+        w={"full"}
         boxShadow={"lg"}
         rounded={"md"}
         overflow={"hidden"}
         border={"1px"}
+        flexDirection={"column"}
       >
-        <Flex gridGap={5} alignItems={"center"} padding={2}>
+        <Flex
+          gridGap={5}
+          alignItems={"center"}
+          padding={2}
+        >
           {!isEditing ? (
             <>
-              <Text fontSize={12}>{description}</Text>
-              <Text fontSize={12}>${amount}</Text>
-              <Text fontSize={12}>{datePurchased}</Text>
+              <Text>{description}</Text>
+              <Text>${amount}</Text>
+              <Text>{datePurchased}</Text>
               <Button
-                fontSize={12}
+                marginLeft={"auto"}
                 onClick={() => {
                   if (window.innerWidth < 1000) {
                     onOpenResponsiveEditModal();
@@ -175,6 +184,7 @@ export const ExpenseItem = ({
                     setIsEditing(true);
                   }
                 }}
+                backgroundColor={"gray"}
               >
                 Edit
               </Button>
@@ -187,7 +197,6 @@ export const ExpenseItem = ({
             />
           )}
           <Button
-            fontSize={12}
             onClick={onOpenDeleteModal}
             backgroundColor={"red"}
             disabled={isEditing}

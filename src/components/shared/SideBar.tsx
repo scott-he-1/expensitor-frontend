@@ -26,7 +26,6 @@ import {
   FiChevronDown,
   FiHome,
   FiMenu,
-  FiSettings,
 } from "react-icons/fi";
 import { BiMoney } from "react-icons/bi";
 import { useAuth } from "../context/AuthContext.js";
@@ -34,7 +33,6 @@ import { useAuth } from "../context/AuthContext.js";
 const LinkItems = [
   { name: "Home", route: "/dashboard", icon: FiHome },
   { name: "Expenses", route: "/dashboard/expenses", icon: BiMoney },
-  { name: "Settings", route: "/dashboard/settings", icon: FiSettings },
 ];
 
 export default function SidebarWithHeader({
@@ -231,7 +229,6 @@ const MobileNav = ({
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
               <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
               <MenuDivider />
               <MenuItem onClick={logOut}>Sign out</MenuItem>
             </MenuList>

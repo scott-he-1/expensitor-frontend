@@ -78,7 +78,8 @@ export const saveExpense = async (expense: SaveExpense) => {
   try {
     return await axios.post(
       `${import.meta.env.VITE_API_BASE_URL}/expense`,
-      expense
+      expense,
+      getAuthConfig()
     );
   } catch (e) {
     throw e;
@@ -90,7 +91,7 @@ export const updateExpense = async (
   expense: SaveExpense
 ) => {
   try {
-    return await axios.put(
+    return await axios.patch(
       `${import.meta.env.VITE_API_BASE_URL}/expense/${expenseId}`,
       expense,
       getAuthConfig()

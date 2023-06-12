@@ -12,7 +12,6 @@ export type ExpenseType = {
 };
 
 export type SaveExpense = {
-  id: number;
   description: string;
   amount: number;
   datePurchased: string;

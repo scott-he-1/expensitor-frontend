@@ -1,20 +1,32 @@
-import {
-  deleteExpense,
-  getUserExpenses,
-  updateExpense,
-} from "./services/client";
-import { useEffect, useState } from "react";
+import { deleteExpense, getUserExpenses } from "./services/client";
+import { useEffect, useState, useRef } from "react";
 import { errorNotification } from "./services/notification";
 import SidebarWithHeader from "./components/shared/SideBar";
-import { Spinner, Text, Wrap, WrapItem } from "@chakra-ui/react";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  Button,
+  Spinner,
+  Text,
+  Wrap,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { ExpenseItem } from "./components/expense/ExpenseItem";
 import jwtDecode from "jwt-decode";
 import { ExpenseType } from "./types";
+import { CreateExpenseTemplate } from "./components/expense/CreateExpenseTemplate";
 
 export const Expense = () => {
   const [expenses, setExpenses] = useState<ExpenseType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState("");
+  const {
+    isOpen: isOpenNewExpenseModal,
+    onOpen: onOpenNewExpenseModal,
+    onClose: onCloseNewExpenseModal,
+  } = useDisclosure();
+  const cancelRef = useRef<any>();
 
   const fetchUserExpenses = () => {
     setLoading(true);
@@ -30,7 +42,7 @@ export const Expense = () => {
         })
         .catch((error) => {
           setError(error.response.data.message);
-          errorNotification(error.code, error.response.data.message);
+          errorNotification(error, error.response.data.message);
         })
         .finally(() => {
           setLoading(false);
@@ -59,7 +71,7 @@ export const Expense = () => {
   if (error) {
     return (
       <SidebarWithHeader>
-        <Text mt={5}>Ooops there was an error</Text>
+        <Text mt={5}>Something went wrong</Text>
       </SidebarWithHeader>
     );
   }
@@ -90,6 +102,34 @@ export const Expense = () => {
           );
         })}
       </Wrap>
+      <Button
+        pos={"fixed"}
+        bottom={"10%"}
+        right={"5%"}
+        width={50}
+        height={50}
+        title="New Expense"
+        backgroundColor={"green"}
+        onClick={onOpenNewExpenseModal}
+      >
+        +
+      </Button>
+      {isOpenNewExpenseModal ? (
+        <AlertDialog
+          isOpen={isOpenNewExpenseModal}
+          leastDestructiveRef={cancelRef}
+          onClose={onCloseNewExpenseModal}
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <CreateExpenseTemplate
+                onCloseNewExpenseModal={onCloseNewExpenseModal}
+                fetchUserExpenses={fetchUserExpenses}
+              />
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
+      ) : null}
     </SidebarWithHeader>
   );
 };

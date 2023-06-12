@@ -24,7 +24,14 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-  {path:"/dashboard/expenses", element: <Expense/>}
+  {
+    path: "/dashboard/expenses",
+    element: (
+      <ProtectedRoute>
+        <Expense />
+      </ProtectedRoute>
+    ),
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
