@@ -110,7 +110,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/dashboard/users");
+      navigate("/dashboard");
     }
   });
 
