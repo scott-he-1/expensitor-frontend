@@ -173,7 +173,7 @@ export const ExpenseItem = ({
           {!isEditing ? (
             <>
               <Text>{description}</Text>
-              <Text>${amount}</Text>
+              <Text>${amount.toFixed(2)}</Text>
               <Text>{datePurchased}</Text>
               <Button
                 marginLeft={"auto"}
