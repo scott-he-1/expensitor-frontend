@@ -78,9 +78,40 @@ export const Expense = () => {
 
   if (expenses.length <= 0) {
     return (
-      <SidebarWithHeader>
-        <Text mt={5}>No expenses available</Text>
-      </SidebarWithHeader>
+      <>
+        <SidebarWithHeader>
+          <Text mt={5}>No expenses available</Text>
+        </SidebarWithHeader>
+        <Button
+          pos={"fixed"}
+          bottom={"10%"}
+          right={"5%"}
+          width={50}
+          height={50}
+          title="New Expense"
+          backgroundColor={"green"}
+          onClick={onOpenNewExpenseModal}
+          zIndex={100}
+        >
+          +
+        </Button>
+        {isOpenNewExpenseModal ? (
+          <AlertDialog
+            isOpen={isOpenNewExpenseModal}
+            leastDestructiveRef={cancelRef}
+            onClose={onCloseNewExpenseModal}
+          >
+            <AlertDialogOverlay>
+              <AlertDialogContent>
+                <CreateExpenseTemplate
+                  onCloseNewExpenseModal={onCloseNewExpenseModal}
+                  fetchUserExpenses={fetchUserExpenses}
+                />
+              </AlertDialogContent>
+            </AlertDialogOverlay>
+          </AlertDialog>
+        ) : null}
+      </>
     );
   }
 
